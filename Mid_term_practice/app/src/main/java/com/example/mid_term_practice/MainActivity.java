@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         lv_member = (ListView) findViewById(R.id.lv_member);
         lv_member.setAdapter(new memberAdapter(this));
         if (memberList.isEmpty()) {
+            // only add these default value when the memberList is empty.
             memberList.add(new Member("張三", "20", "男", "資管"));
             memberList.add(new Member("李四", "22", "男", "資工"));
             memberList.add(new Member("瑪麗", "18", "女", "企管"));
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = layoutInflater.inflate(R.layout.listview_item, parent,false);
+                // Do not inflate again and again when scrolling the content.
+                convertView = layoutInflater.inflate(R.layout.listview_item, parent, false);
             }
             Member member = memberList.get(position);
             TextView tv_name, tv_age, tv_sex, tv_department;
