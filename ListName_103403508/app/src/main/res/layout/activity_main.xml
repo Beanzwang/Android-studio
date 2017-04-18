@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="myproject_103403508.beanz.listname_103403508.MainActivity">
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="@string/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_add"
+            android:onClick="addNewMember"
+            android:layout_weight="1"/>
+
+        <Button
+            android:text="@string/delete_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_delete_all"
+            android:onClick="deleteAllMember"
+            android:layout_weight="1"/>
+
+        <Button
+            android:text="@string/add_example"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_add_example"
+            android:onClick="addExample"
+            android:layout_weight="1"/>
+    </TableRow>
+
+    <TextView
+        android:text="@string/total_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_total_member"
+        android:layout_gravity="center"
+        android:textSize="@dimen/tv_textSize"
+        android:textColor="@android:color/black"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="318dp"
+        android:id="@+id/lv_member_list">
+    </ListView>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:weightSum="5">
+
+        <Button
+            android:text="@string/sorting_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_sorting_age"
+            android:onClick="sortingAge"
+            android:layout_weight="1"/>
+
+        <Button
+            android:text="@string/sorting_department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_sorting_department"
+            android:onClick="sortingDepartment"
+            android:layout_weight="1"/>
+
+        <Button
+            android:text="@string/display_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_display_male"
+            android:onClick="displayMale"
+            android:layout_weight="1"/>
+
+        <Button
+            android:text="@string/display_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_display_female"
+            android:onClick="displayFemale"
+            android:layout_weight="1"/>
+
+        <Button
+            android:text="@string/display_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_display_all"
+            android:onClick="displayAll"
+            android:layout_weight="1"/>
+    </TableRow>
+</LinearLayout>

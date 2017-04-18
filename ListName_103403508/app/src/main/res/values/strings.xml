@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ListName_103403508</string>
+    <string name="add">新增</string>
+    <string name="delete_all">刪除全部資料</string>
+    <string name="add_example">新增範例</string>
+    <string name="sorting_age">年齡排序</string>
+    <string name="sorting_department">系別排序</string>
+    <string name="display_male">男</string>
+    <string name="display_female">女</string>
+    <string name="display_all">全部</string>
+    <string name="total_member">共幾筆資料</string>
+    <string name="name">姓名：</string>
+    <string name="sex">性別：</string>
+    <string name="age">年齡：</string>
+    <string name="department">系別：</string>
+    <string name="first_member">第一筆</string>
+    <string name="go_to_main">回主選單</string>
+    <string name="last_member">最後一筆</string>
+    <string name="clear_columns">清除欄位</string>
+
+</resources>
