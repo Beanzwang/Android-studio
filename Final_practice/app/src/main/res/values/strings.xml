@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Final_practice</string>
+    <string name="connect_service">Start Scrapping!</string>
+    <string name="hint">Set scrapping timer.</string>
+    <string name="confirm">Confirm</string>
+    <string name="title_activity_data_display_query">DataDisplayQueryActivity</string>
+</resources>
