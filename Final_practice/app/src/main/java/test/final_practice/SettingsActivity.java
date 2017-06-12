@@ -64,9 +64,10 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void settingConditions(String title, String conditions) {
+        // DB queries
         if (title.equals("GOLD")) {
             if (conditions.equals(">")) {
-                
+
             } else if (conditions.equals("<")) {
 
             } else {

@@ -14,6 +14,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -55,7 +56,7 @@ public class InternetService extends Service{
             timer.cancel();
         }
         timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
+        final TimerTask timerTask = new TimerTask() {
             public void run() {
                 // send broadcast
                 sendBroadcast(new Intent(ACTION));
@@ -65,10 +66,11 @@ public class InternetService extends Service{
                     docs_oil = Jsoup.parse(oil_url, 10000);
                     Elements eles_gold = docs_gold.select("span[class=Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)]");
                     Elements eles_oil = docs_oil.select("span[class=Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)]");
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     Log.e("Scrapping", eles_gold.first().text());
                     Log.e("Scrapping", eles_oil.first().text());
-                    Log.e("Scrapping", String.valueOf(System.currentTimeMillis()));
-                    Long time = System.currentTimeMillis();
+                    Log.e("Scrapping", String.valueOf(timestamp.getTime()));
+                    int time = (int) timestamp.getTime();
                     db.insert(new Stock(GOLD, transform_str(eles_gold.first().text()), time));
                     db.insert(new Stock(OIL, transform_str(eles_oil.first().text()), time));
                 } catch (IOException e) {

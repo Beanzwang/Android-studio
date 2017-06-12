@@ -70,6 +70,15 @@ public class SQLiteDB {
         return list;
     }
 
+    public int getCount() {
+        String countQuery = "SELECT  * FROM " + Entry.TABLE_NAME;
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int cnt = cursor.getCount();
+        cursor.close();
+        return cnt;
+    }
+
     public long insert(Stock stock) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
