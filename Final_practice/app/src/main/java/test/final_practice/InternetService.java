@@ -14,9 +14,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 

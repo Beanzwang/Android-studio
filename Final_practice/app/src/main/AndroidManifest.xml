@@ -25,7 +25,8 @@
             android:enabled="true"
             android:exported="false" />
 
-        <activity android:name=".DisplayQueryActivity"></activity>
+        <activity android:name=".DisplayQueryActivity" />
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>

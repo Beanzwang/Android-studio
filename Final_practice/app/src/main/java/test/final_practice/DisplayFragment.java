@@ -43,7 +43,7 @@ public class DisplayFragment extends ListFragment implements AdapterView.OnItemC
         mLayoutInflater = inflater;
         File databasePath = mContext.getDatabasePath(DB_NAME);
         mDb = SQLiteDatabase.openOrCreateDatabase(databasePath, null);
-        /* must select id, ir it will generate error */
+        /* must select id, or it will generate error */
         mCursor = mDb.rawQuery("select _id,* from " + TABLE_NAME, null);
         View view = mLayoutInflater.inflate(R.layout.fragment_display, container, false);
         init(view);

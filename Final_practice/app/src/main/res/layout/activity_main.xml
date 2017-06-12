@@ -34,11 +34,27 @@
         android:id="@+id/btn_start_service"
         android:onClick="startService" />
 
-    <Button
-        android:text="@string/goToDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_goto_display"
-        android:onClick="goToDisplay" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:text="@string/goToDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_goto_display"
+            android:onClick="goToDisplay"
+            android:layout_weight="1"/>
+
+        <Button
+            android:text="@string/goToSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_goto_settings"
+            android:onClick="goToSettings"
+            android:layout_weight="1"/>
+
+    </TableRow>
+
 
 </TableLayout>
