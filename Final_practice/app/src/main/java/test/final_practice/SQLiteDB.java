@@ -72,20 +72,19 @@ public class SQLiteDB {
         ContentValues values = new ContentValues();
         values.put(Entry.COL_TITLE, stock.getTitle());
         values.put(Entry.COL_PRICE, stock.getPrice());
-        values.put(Entry.COL_TIMESTAMP, stock.getPrice());
+        values.put(Entry.COL_TIMESTAMP, stock.getTimestamp());
 
         /* if fail, return -1 */
         return db.insert(Entry.TABLE_NAME, null, values);
     }
 
-    private class Entry implements BaseColumns {
+    public class Entry implements BaseColumns {
         // To prevent someone from accidentally instantiating the contract class,
         private static final String TABLE_NAME = "entry";
         private static final String COL_TITLE = "title";
         private static final String COL_PRICE = "price";
         private static final String COL_TIMESTAMP = "timestamp";
     }
-
 
     private class SQLiteHelper extends SQLiteOpenHelper {
 

@@ -4,4 +4,8 @@
     <string name="hint">Set scrapping timer.</string>
     <string name="confirm">Confirm</string>
     <string name="title_activity_data_display_query">DataDisplayQueryActivity</string>
+    <string name="no_data">No data to display</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
