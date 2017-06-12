@@ -17,13 +17,6 @@
         android:id="@+id/tv_data_num"
         android:gravity="center"/>
 
-    <TextView
-        android:text="from to"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_from_to" />
-
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -50,6 +43,25 @@
         android:layout_height="match_parent">
 
         <Button
+            android:text="GOLD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_gold"
+            android:layout_weight="1"/>
+
+        <Button
+            android:text="OIL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_oil"
+            android:layout_weight="1"/>
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <Button
             android:text="@string/goBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,11 +69,9 @@
             android:onClick="goBack"/>
 
     </TableRow>
-
-    <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="test.final_practice.DisplayFragment"
-        android:id="@+id/fragment" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lvPList"/>
 
 </TableLayout>

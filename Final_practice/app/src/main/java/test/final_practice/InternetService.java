@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -66,15 +68,19 @@ public class InternetService extends Service{
                     docs_oil = Jsoup.parse(oil_url, 10000);
                     Elements eles_gold = docs_gold.select("span[class=Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)]");
                     Elements eles_oil = docs_oil.select("span[class=Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)]");
+                    Number n_gold = NumberFormat.getNumberInstance(java.util.Locale.US).parse(eles_gold.first().text());
+                    Number n_oil = NumberFormat.getNumberInstance(java.util.Locale.US).parse(eles_oil.first().text());
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     Log.e("Scrapping", eles_gold.first().text());
                     Log.e("Scrapping", eles_oil.first().text());
                     Log.e("Scrapping", String.valueOf(timestamp.getTime()));
-                    int time = (int) timestamp.getTime();
+                    long time = timestamp.getTime() / 1000;
                     sendBroadcast(new Intent(ACTION));
-                    db.insert(new Stock(GOLD, transform_str(eles_gold.first().text()), time));
-                    db.insert(new Stock(OIL, transform_str(eles_oil.first().text()), time));
+                    db.insert(new Stock(GOLD, n_gold.doubleValue(), time));
+                    db.insert(new Stock(OIL, n_oil.doubleValue(), time));
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
@@ -88,11 +94,6 @@ public class InternetService extends Service{
         schedule();
     }
 
-    private double transform_str(String str) {
-        // superclass of classes of numbers
-        str = str.replace(",", "");
-        return Double.parseDouble(str);
-    }
 
     @Override
     public void onCreate() {

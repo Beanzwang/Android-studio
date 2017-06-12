@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         if (m.find()) {
             mService.setDelay(Integer.parseInt(string));
         } else {
-            Toast.makeText(this, "inValid pattern in edit text.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "InValid pattern in edit text.", Toast.LENGTH_SHORT).show();
         }
     }
 

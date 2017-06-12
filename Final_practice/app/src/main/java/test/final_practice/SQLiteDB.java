@@ -27,55 +27,86 @@ public class SQLiteDB {
         List<Stock> list = new ArrayList<>();
 
         SQLiteDatabase db = mHelper.getReadableDatabase();
-        String columns[] = { Entry.COL_TITLE, Entry.COL_PRICE, Entry.COL_TIMESTAMP };
+        String columns[] = { Entry._ID, Entry.COL_TITLE, Entry.COL_PRICE, Entry.COL_TIMESTAMP };
         Cursor cursor = db.query(Entry.TABLE_NAME, columns, null, null, null, null, null);
 
         while(cursor.moveToNext()) {  // moving the cursor to get the result.
-            String title = cursor.getString(0);
-            int price = cursor.getInt(1);
-            int timestamp = cursor.getInt(2);
-            Stock stock = new Stock(title, price, timestamp);
+            int id = cursor.getInt(0);
+            String type = cursor.getString(1);
+            double price = cursor.getDouble(2);
+            String time = cursor.getString(3);
+            Stock stock = new Stock(id, type, price, Long.valueOf(time));
             list.add(stock);
         }
         cursor.close();
         return list;
     }
 
-    public List findByTitle(String title) {
-        List<Stock> list = new ArrayList<>();
+    public List getAllGold() {
         SQLiteDatabase db = mHelper.getReadableDatabase();
-        String columns[] = { Entry.COL_PRICE, Entry.COL_TIMESTAMP };
+        String[] columns = {
+                Entry._ID, Entry.COL_TIMESTAMP, Entry.COL_PRICE, Entry.COL_TITLE
+        };
         String selection = Entry.COL_TITLE + " = ?;";
-        String selectionArgs[] = {title};  /* replace ? with title string */
-
-        Cursor cursor = db.query(Entry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        String[] selectionArgs = {"GOLD"};
+        Cursor cursor = db.query(Entry.TABLE_NAME, columns, selection, selectionArgs, null, null,
+                null);
+        List<Stock> spotList = new ArrayList<>();
         while (cursor.moveToNext()) {
-            int price = cursor.getInt(0);
-            int timestamp = cursor.getInt(1);
-            Stock stock = new Stock(title, price, timestamp);
-            list.add(stock);
+            int id = cursor.getInt(0);
+            String time = cursor.getString(1);
+            double price = cursor.getDouble(2);
+            String type = cursor.getString(3);
+            Stock stock = new Stock(id, type, price, Long.valueOf(time));
+            spotList.add(stock);
         }
         cursor.close();
-
-        return list;
+        return spotList;
     }
 
-    public List findByTime(int startTime, int endTime) {
-        List<Stock> list = new ArrayList<>();
+    public List getAllOil() {
         SQLiteDatabase db = mHelper.getReadableDatabase();
-        String columns[] = { Entry.COL_TITLE, Entry.COL_PRICE, Entry.COL_TIMESTAMP };
-        String selection = "SELECT * FROM " + Entry.TABLE_NAME + " WHERE " + Entry.COL_TIMESTAMP  +
-                " >= " + Integer.toString(startTime) + " AND "
-                + Entry.COL_TIMESTAMP + " <= " + Integer.toString(endTime);
-        Cursor cursor = db.query(Entry.TABLE_NAME, columns, selection, null, null, null, null);
-        while(cursor.moveToNext()) {
-            String title = cursor.getString(0);
-            int price = cursor.getInt(1);
-            int timestamp = cursor.getInt(2);
-            Stock stock = new Stock(title, price, timestamp);
-            list.add(stock);
+        String[] columns = {
+                Entry._ID, Entry.COL_TIMESTAMP, Entry.COL_PRICE, Entry.COL_TITLE
+        };
+        String selection = Entry.COL_TITLE + " = ?;";
+        String[] selectionArgs = {"OIL"};
+        Cursor cursor = db.query(Entry.TABLE_NAME, columns, selection, selectionArgs, null, null,
+                null);
+        List<Stock> spotList = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String time = cursor.getString(1);
+            double price = cursor.getDouble(2);
+            String type = cursor.getString(3);
+            Stock stock = new Stock(id, type, price, Long.valueOf(time));
+            spotList.add(stock);
         }
-        return list;
+        cursor.close();
+        return spotList;
+    }
+
+    public List<Stock> getByTime(long st,long end) {
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+        String[] columns = {
+                Entry._ID, Entry.COL_TIMESTAMP, Entry.COL_PRICE, Entry.COL_TITLE
+        };
+        String selection = Entry.COL_TIMESTAMP + " > ?"+" AND "+Entry.COL_TIMESTAMP+" < ? ;";
+        String[] selectionArgs = {String.valueOf(st),String.valueOf(end)};
+        Cursor cursor = db.query(Entry.TABLE_NAME, columns, selection, selectionArgs, null, null,
+                null);
+        List<Stock> spotList = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String time = cursor.getString(1);
+            double price = cursor.getDouble(2);
+            String type = cursor.getString(3);
+            //Log.d("Here::::",String.valueOf(price));
+            Stock stock = new Stock(id, type, price, Long.valueOf(time));
+            spotList.add(stock);
+        }
+        cursor.close();
+        return spotList;
     }
 
     public int getCount() {
