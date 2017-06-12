@@ -50,8 +50,8 @@ public class SQLiteDB {
 
         Cursor cursor = db.query(Entry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
         while (cursor.moveToNext()) {
-            int price = cursor.getInt(1);
-            int timestamp = cursor.getInt(2);
+            int price = cursor.getInt(0);
+            int timestamp = cursor.getInt(1);
             Stock stock = new Stock(title, price, timestamp);
             list.add(stock);
         }
@@ -64,14 +64,22 @@ public class SQLiteDB {
         List<Stock> list = new ArrayList<>();
         SQLiteDatabase db = mHelper.getReadableDatabase();
         String columns[] = { Entry.COL_TITLE, Entry.COL_PRICE, Entry.COL_TIMESTAMP };
-        // TODO: between
-        String selection = Entry.COL_TIMESTAMP + " >= " + Integer.toString(startTime) + " AND ";
-
+        String selection = "SELECT * FROM " + Entry.TABLE_NAME + " WHERE " + Entry.COL_TIMESTAMP  +
+                " >= " + Integer.toString(startTime) + " AND "
+                + Entry.COL_TIMESTAMP + " <= " + Integer.toString(endTime);
+        Cursor cursor = db.query(Entry.TABLE_NAME, columns, selection, null, null, null, null);
+        while(cursor.moveToNext()) {
+            String title = cursor.getString(0);
+            int price = cursor.getInt(1);
+            int timestamp = cursor.getInt(2);
+            Stock stock = new Stock(title, price, timestamp);
+            list.add(stock);
+        }
         return list;
     }
 
     public int getCount() {
-        String countQuery = "SELECT  * FROM " + Entry.TABLE_NAME;
+        String countQuery = "SELECT * FROM " + Entry.TABLE_NAME;
         SQLiteDatabase db = mHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int cnt = cursor.getCount();

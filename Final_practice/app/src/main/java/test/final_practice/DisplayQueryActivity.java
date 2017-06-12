@@ -26,11 +26,15 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
+import static test.final_practice.DisplayFragment.mListAdapter;
+
 public class DisplayQueryActivity extends AppCompatActivity {
 
     /* display data and making queries based on time and prices */
     private static int sHour, sMinute;
     private static int eHour, eMinute;
+    public static int startTime;
+    public static int endTime;
     private TextView tv_from_to, tv_data_num;
     private Button btn_start_date, btn_end_date;
     private static final String STARTTAG = "startTime";
@@ -106,6 +110,7 @@ public class DisplayQueryActivity extends AppCompatActivity {
                 eHour = hourOfDay;
                 eMinute = minute;
             }
+            mListAdapter.notifyDataSetChanged();
         }
     }
 }

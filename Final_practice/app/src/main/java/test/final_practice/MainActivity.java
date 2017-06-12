@@ -1,8 +1,10 @@
 package test.final_practice;
 
+import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private InternetService mService;
     private boolean mBound = false;
     private SQLiteDB db;
+    private BroadCast receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
         if (db == null) {
-            db = new SQLiteDB(getApplicationContext());
+            db = new SQLiteDB(this);
         }
     }
 
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         btn_start_service = (Button) findViewById(R.id.btn_start_service);
         btn_confirm = (Button) findViewById(R.id.btn_confirm);
         et_confirm = (EditText) findViewById(R.id.et_confirm);
+        receiver = new BroadCast(this, MainActivity.this);
     }
 
     public boolean check_connection() {
@@ -74,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         if(check_connection()) {
             Intent intent = new Intent(this, InternetService.class);
             bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+            IntentFilter filter = new IntentFilter(InternetService.ACTION);
+            registerReceiver(receiver, filter);
             Toast.makeText(this, "Connection start", Toast.LENGTH_SHORT).show();
         }
     }
@@ -93,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         if (mBound) {
             unbindService(mConnection);
+            unregisterReceiver(receiver);
             mBound = false;
         }
     }

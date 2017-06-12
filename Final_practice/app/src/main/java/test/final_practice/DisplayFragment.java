@@ -17,6 +17,9 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.List;
 
+import static test.final_practice.DisplayQueryActivity.endTime;
+import static test.final_practice.DisplayQueryActivity.startTime;
+
 // reference:
 // https://stackoverflow.com/questions/11409028/android-fetch-data-from-database-into-listfragment
 public class DisplayFragment extends ListFragment implements AdapterView.OnItemClickListener {
@@ -29,7 +32,7 @@ public class DisplayFragment extends ListFragment implements AdapterView.OnItemC
 
     // Elements
     private ListView mListView;
-    private SimpleCursorAdapter mListAdapter;
+    public static SimpleCursorAdapter mListAdapter;
 
     private static final String DB_NAME = "price.db";
     private static final String TABLE_NAME = "entry";
@@ -44,7 +47,12 @@ public class DisplayFragment extends ListFragment implements AdapterView.OnItemC
         File databasePath = mContext.getDatabasePath(DB_NAME);
         mDb = SQLiteDatabase.openOrCreateDatabase(databasePath, null);
         /* must select id, or it will generate error */
-        mCursor = mDb.rawQuery("select _id,* from " + TABLE_NAME, null);
+        String query = "SELECT _id,* FROM " + TABLE_NAME + " WHERE " + COL_TIMESTAMP +
+                " >= " + Integer.toString(startTime) + " AND " + COL_TIMESTAMP + " <= " +
+                Integer.toString(endTime)+ COL_TIMESTAMP;
+        // mCursor = mDb.rawQuery("select _id,* from " + TABLE_NAME, null);
+        mCursor = mDb.rawQuery(query, null);
+
         View view = mLayoutInflater.inflate(R.layout.fragment_display, container, false);
         init(view);
         return view;

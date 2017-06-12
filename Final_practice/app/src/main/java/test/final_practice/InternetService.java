@@ -38,7 +38,7 @@ public class InternetService extends Service{
     private long delay = (long) (10 * 1000);  /* millisecond */
     private Timer timer;
     private SQLiteDB db;
-
+    public static final String ACTION = "Stock Service";
 
     class InternetBinder extends Binder {
         InternetService getService() { return InternetService.this; }
@@ -71,6 +71,7 @@ public class InternetService extends Service{
                     Log.e("Scrapping", eles_oil.first().text());
                     Log.e("Scrapping", String.valueOf(timestamp.getTime()));
                     int time = (int) timestamp.getTime();
+                    sendBroadcast(new Intent(ACTION));
                     db.insert(new Stock(GOLD, transform_str(eles_gold.first().text()), time));
                     db.insert(new Stock(OIL, transform_str(eles_oil.first().text()), time));
                 } catch (IOException e) {
