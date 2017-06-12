@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,8 @@ public class SQLiteDB {
         SQLiteDatabase db = mHelper.getReadableDatabase();
         String columns[] = { Entry.COL_TITLE, Entry.COL_PRICE, Entry.COL_TIMESTAMP };
         Cursor cursor = db.query(Entry.TABLE_NAME, columns, null, null, null, null, null);
-        while(cursor.moveToNext()) {
+
+        while(cursor.moveToNext()) {  // moving the cursor to get the result.
             String title = cursor.getString(0);
             int price = cursor.getInt(1);
             int timestamp = cursor.getInt(2);
@@ -104,8 +107,11 @@ public class SQLiteDB {
             super(context, DB_NAME, null, DB_VERSION);
         }
 
+//        onCreate() is only run when the database file did not exist and was just created.
         @Override
         public void onCreate(SQLiteDatabase db) {
+            Log.e("SQLite", "db onCreate");
+            db.execSQL(SQL_DELETE_ENTRIES);
             db.execSQL(SQL_CREATE_ENTRIES);
         }
 

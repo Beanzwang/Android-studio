@@ -7,10 +7,10 @@ package test.final_practice;
 public class Stock {
 
     private String title;
-    private int price;
-    private int timestamp;
+    private double price;
+    private long timestamp;
 
-    public Stock(String title, int price, int timestamp) {
+    public Stock(String title, double price, long timestamp) {
         this.title = title;
         this.price = price;
         this.timestamp = timestamp;
@@ -20,11 +20,11 @@ public class Stock {
         return title;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public int getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 

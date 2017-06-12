@@ -19,13 +19,12 @@ import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
-    /* compile jsoup in grandle */
+    /* compile jsoup in gradle */
     Button btn_start_service, btn_confirm;
     EditText et_confirm;
     private InternetService mService;
     private boolean mBound = false;
-
-    SQLiteDB db;
+    private SQLiteDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,5 +107,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "inValid pattern in edit text.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void goToDisplay(View view) {
+        Intent intent = new Intent(this, DisplayQueryActivity.class);
+        startActivity(intent);
     }
 }

@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.io.File;
 import java.util.List;
 
 // reference:
@@ -39,15 +41,16 @@ public class DisplayFragment extends ListFragment implements AdapterView.OnItemC
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = getActivity();
         mLayoutInflater = inflater;
-        mDb = SQLiteDatabase.openOrCreateDatabase(DB_NAME, null);
-        // TODO: change the query.
-        mCursor = mDb.rawQuery("SELECT CameraName FROM " + TABLE_NAME , null);
+        File databasePath = mContext.getDatabasePath(DB_NAME);
+        mDb = SQLiteDatabase.openOrCreateDatabase(databasePath, null);
+        /* must select id, ir it will generate error */
+        mCursor = mDb.rawQuery("select _id,* from " + TABLE_NAME, null);
         View view = mLayoutInflater.inflate(R.layout.fragment_display, container, false);
-        init();
+        init(view);
         return view;
     }
 
-    public void init() {
+    public void init(View v) {
         mListAdapter = new SimpleCursorAdapter(
                 mContext,
                 R.layout.display_list,
@@ -56,6 +59,7 @@ public class DisplayFragment extends ListFragment implements AdapterView.OnItemC
                 new int[] { R.id.tv_title, R.id.tv_price, R.id.tv_timestamp},
                 1
         );
+        mListView = (ListView) v.findViewById(android.R.id.list);
         mListView.setAdapter(mListAdapter);
     }
 
@@ -66,9 +70,7 @@ public class DisplayFragment extends ListFragment implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        Toast.makeText(getActivity(), "clicked on: " + Integer.toString(position), Toast.LENGTH_SHORT).show();
     }
-
-
 
 }

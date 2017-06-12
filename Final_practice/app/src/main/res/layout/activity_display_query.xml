@@ -11,16 +11,23 @@
     android:orientation="vertical"
     tools:context="test.final_practice.DisplayQueryActivity">
 
-
     <Button
-        android:text="Button"
+        android:text="@string/start_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button" />
+        android:id="@+id/btn_start_date" />
 
     <Button
-        android:text="Button"
+        android:text="@string/end_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button2" />
+        android:id="@+id/btn_end_date" />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="test.final_practice.DisplayFragment"
+        android:id="@+id/lv_frag" />
+
+
 </LinearLayout>
