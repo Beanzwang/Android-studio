@@ -51,12 +51,13 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void confirmSettings(View view) {
+        String price = et_price.getText().toString();
         String title;
         String conditions;
-        if (checkPrice(et_price.getText().toString())) {
+        if (checkPrice(price)) {
             title = spi_title.getSelectedItem().toString();
             conditions = spi_condition.getSelectedItem().toString();
-            settingConditions(title, conditions);
+            settingConditions(title, conditions, Double.parseDouble(price));
         } else {
             Toast.makeText(this, "Invalid price format.", Toast.LENGTH_SHORT).show();
         }
@@ -69,25 +70,14 @@ public class SettingsActivity extends AppCompatActivity {
         return m.find();
     }
 
-    private void settingConditions(String title, String conditions) {
-        // DB queries
-        if (title.equals("GOLD")) {
-            if (conditions.equals(">")) {
-
-            } else if (conditions.equals("<")) {
-
-            } else {
-
-            }
-        } else {
-            if (conditions.equals(">")) {
-
-            } else if (conditions.equals("<")) {
-
-            } else {
-
-            }
-        }
+    private void settingConditions(String title, String conditions, double price) {
+        Warning warning = new Warning(this);
+        warning.settingCondition(title, conditions, price);
     }
 
+    public void goBack(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

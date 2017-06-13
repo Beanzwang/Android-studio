@@ -148,14 +148,7 @@ public class DisplayQueryActivity extends AppCompatActivity {
             //Log.d("Position","is:"+position);
             if (convertView == null) {
                 convertView = layoutInflater.inflate(R.layout.display_list, parent, false);
-
-                // if (position % 3 == 1)
                 convertView.setBackgroundColor(Color.TRANSPARENT);
-                /*
-                if (position % 3== 0)
-                    convertView.setBackgroundColor(Color.YELLOW);
-                if(position % 3 == 2)
-                    convertView.setBackgroundColor(Color.MAGENTA);*/
             }
 
             Stock stock = stockList.get(position);

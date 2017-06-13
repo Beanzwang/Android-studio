@@ -41,6 +41,7 @@ public class InternetService extends Service{
     private Timer timer;
     private SQLiteDB db;
     public static final String ACTION = "Stock Service";
+    private Warning warning;
 
     class InternetBinder extends Binder {
         InternetService getService() { return InternetService.this; }
@@ -61,7 +62,6 @@ public class InternetService extends Service{
         final TimerTask timerTask = new TimerTask() {
             public void run() {
                 // send broadcast
-                sendBroadcast(new Intent(ACTION));
                 try {
                     /* setting timeout to 10s */
                     docs_gold = Jsoup.parse(gold_url, 10000);
@@ -75,12 +75,19 @@ public class InternetService extends Service{
                     Log.e("Scrapping", eles_oil.first().text());
                     Log.e("Scrapping", String.valueOf(timestamp.getTime()));
                     long time = timestamp.getTime() / 1000;
-                    sendBroadcast(new Intent(ACTION));
+
+                    double price;
+                    if (warning.getTitle().equals(GOLD)) {
+                        price = n_gold.doubleValue();
+                    } else {
+                        price = n_oil.doubleValue();
+                    }
+                    if (warning.testCondition(price)) {
+                        sendBroadcast(new Intent(ACTION));
+                    }
                     db.insert(new Stock(GOLD, n_gold.doubleValue(), time));
                     db.insert(new Stock(OIL, n_oil.doubleValue(), time));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
+                } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
             }
@@ -90,7 +97,8 @@ public class InternetService extends Service{
     }
 
     public void setDelay(int delay) {
-        this.delay = delay;
+        // millisecond
+        this.delay = delay * 1000;
         schedule();
     }
 
@@ -107,7 +115,7 @@ public class InternetService extends Service{
     @Override
     public IBinder onBind(Intent intent) {
         // A client is binding to the service with bindService()
-        Toast.makeText(this, "Service bind!", Toast.LENGTH_SHORT).show();
+        warning = new Warning(this);
         if (db == null) {
             db = new SQLiteDB(getApplicationContext());
         }

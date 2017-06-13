@@ -11,13 +11,15 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.widget.Toast;
 
+import java.util.Date;
+import java.util.Random;
+
 /**
  * Created by wangbeanz on 13/06/2017.
  */
 
 public class Notification {
 
-    private final static int NOTIFICATION_ID = 0;
     private Activity activity;
     private Context context;
 
@@ -54,7 +56,9 @@ public class Notification {
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         // id allows you to update the notification later on.
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+        int Unique_Integer_Number = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        mNotificationManager.notify(Unique_Integer_Number, mBuilder.build());
     }
+
 
 }

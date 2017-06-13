@@ -43,4 +43,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_confirm_settings"
         android:onClick="confirmSettings"/>
+
+    <Button
+        android:text="@string/goBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_go_back"
+        android:onClick="goBack"/>
 </TableLayout>
