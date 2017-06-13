@@ -27,6 +27,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import static test.final_practice.R.id.btn_confirm_time;
+
 
 public class DisplayQueryActivity extends AppCompatActivity {
 
@@ -37,6 +39,7 @@ public class DisplayQueryActivity extends AppCompatActivity {
     public static boolean P_FLAG = false;
     private Button Gold_b;
     private Button Oil_b;
+    private Button stn_confirm;
     private static final String STARTTAG = "startTime";
     private static final String ENDTAG = "endTime";
     private static int sHour, sMinute;
@@ -61,6 +64,7 @@ public class DisplayQueryActivity extends AppCompatActivity {
         ctx = this;
         stockList = db.getData();
         Log.d("help", stockList.toString());
+        stn_confirm = (Button) findViewById(R.id.btn_confirm_time);
         list_count = (TextView)findViewById(R.id.tv_data_num);
         list_count.setText("共" + stockList.size() + "筆資料");
         btn_start_date = (Button) findViewById(R.id.btn_start_date);

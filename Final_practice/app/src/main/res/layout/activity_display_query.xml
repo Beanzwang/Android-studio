@@ -36,6 +36,14 @@
             android:id="@+id/btn_end_date"
             android:onClick="endTime"
             android:layout_weight="1"/>
+
+        <Button
+            android:text="@string/confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_confirm_time"
+            android:onClick="filterByTime"
+            android:layout_weight="1"/>
     </TableRow>
 
     <TableRow

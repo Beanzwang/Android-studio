@@ -24,8 +24,8 @@ public class BroadCast extends BroadcastReceiver {
     }
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast toast = Toast.makeText(context, "Time over!", Toast.LENGTH_LONG);
-        toast.show();
+//        Toast toast = Toast.makeText(context, "Time over!", Toast.LENGTH_LONG);
+//        toast.show();
 //        MediaPlayer mp = MediaPlayer.create(activity, R.raw.alarm);
 //        try {
 //            mp.start();
